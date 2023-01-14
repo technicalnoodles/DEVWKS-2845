@@ -9,7 +9,7 @@ const config = {
   title: 'DEVWKS-2845',
   tagline: 'Learn about Meraki and AWS LAmbda',
   url: 'https://galica9999.github.io',
-  baseUrl: '/DEVWKS-2845',
+  baseUrl: '/DEVWKS-2845/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
