@@ -9,7 +9,7 @@ const config = {
   title: 'DEVWKS-2845',
   tagline: 'Learn about Meraki and AWS LAmbda',
   url: 'https://galica9999.github.io',
-  baseUrl: '/DEVWKS-2845/',
+  baseUrl: '/DEVWKS-2845',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -17,7 +17,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'galica9999', // Usually your GitHub org/user name.
-  projectName: 'galica9999', // Usually your repo name.
+  projectName: 'DEVWKS-2845', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -65,7 +65,7 @@ const config = {
             label: 'Tutorial',
           },
           {
-            href: 'https://github.com/galica9999.DEVWKS-2845',
+            href: 'https://github.com/galica9999/DEVWKS-2845',
             label: 'GitHub',
             position: 'right',
           },
