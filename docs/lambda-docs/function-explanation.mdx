@@ -4,11 +4,11 @@ sidebar_position: 3
 
 # Functions Explanation
 
-With Lambda functions, there is something called a handler.  This handler is the insertion point of the Lambda function.  
-By default the Lambda handler will use a file called `lambda_function.py` and require a function called `lambda_handler`. If this file does not exist or does no have that function, then the function will fail to run.
+Lambda functions use `handlers`, which act as the insertion point for the Lambda function.  
+By default the Lambda handler will use a file called `lambda_function.py` and require a method called `lambda_handler`. If this file does not exist or does not have that method, then the Lambda function will fail to run.
 :::note
 
-It is possbile to change the default `handler` in the Lambda function by editing the **Runtime settigns**.  This can be done by selecting the **Code** tab under the **Function Overview**.  Then scroll down to the **Runtime settings**.  Editing the `Handler` section in the **Runtime Settings** will allow you to change the default insertion point.
+It is possbile to change the default `handler` in the Lambda function by editing the **Runtime settings**. This can be done by selecting the **Code** tab under the **Function Overview**. Then scroll down to the **Runtime settings**. Editing the `Handler` section in the **Runtime Settings** will allow you to change the default insertion point.
 
 :::
 
@@ -22,13 +22,17 @@ def lambda_handler(event, context):
         'body': json.dumps('Hello from Lambda!')
     }
 ```
+
 ## Lambda Function input variables
-Within the lambda_handler function that is defined above there are two variable that it receives as input.  The `event` variable and the `context` variable.  
+
+Within the lambda_handler function that is defined above there are two variables that it receives as input: the `event` variable and the `context` variable.
 
 ### Event variable
-The `event` variable is the data the Lambda function receives as a payload.  This could be a string that contains `'hello'`, a boolean of `false` or an object.  We can then use this event and parse the data in our lambda_handler function.
+
+The `event` variable is the data the Lambda function receives as a payload. This could be a string that contains `'hello'`, a boolean of `false`, or an object. We can then use this event and parse the data in our lambda_handler function.
 
 Here is an example event that we received from the Meraki Dashbaord and we will use later for testing:
+
 ```json
 {
   "version": "0.1",
@@ -63,30 +67,35 @@ Here is an example event that we received from the Meraki Dashbaord and we will 
 ```
 
 ### Context variable
-The `context` variable is a variable passed to the `lambda_handler` function that contains runtime information like the version of the function, memory limit, and a time limit for how long the funciton can run before being killed by AWS.
+
+The `context` variable is a variable passed to the `lambda_handler` function that contains runtime information like the version of the function, memory limit, and a time limit for how long the function can run before being killed by AWS.
 
 For more information on the context variable you can check this [AWS guide](https://docs.aws.amazon.com/lambda/latest/dg/python-context.html).
 
 ## Using libraries not provided by AWS
 
-There are three options to use a library that is not provided by AWS in a runtime environemnt.  
-* Create a `layer`
-* Containerize the code
-* Zip the code
+There are three options to use a library that is not provided by AWS in a runtime environment.
+
+- Create a _layer_
+- Containerize the code
+- Zip the code
 
 For our purposes and as the easiest option, we will zip our code to enable the use of external libraries.
 
-We have already done most of the setup to be able to do this.  First we need to make sure we are in the `shutdownPort` directory in the CLI.  Then we need to create a directory called `package`.  The directory structure should look like the below:
+We have already done most of the setup to be able to do this. First we need to make sure we are in the `shutdownPort` directory in the CLI. Then we need to create a directory called `package` using the CLI. The directory structure should look like the below after the directory is created:
+
 ```bash
 shutdownPort
  | lambda_function.py
  | package
 ```
 
-We now need to install the python `requests` library so that we may make an API call to the Meraki Dashboard later on in the workshop. However, we need to install the library in the package directory and not globaly.  To do this, we need to run the below command in the `shutdownPort` directory:
+We now need to install the python `requests` library so that we may make an API call to the Meraki Dashboard later on in the workshop. However, we need to install the library in the package directory and not globally. To do this, we need to run the below command in the `shutdownPort` directory:
 
-```pip install --target ./package requests```
+`pip install --target ./package requests`
+
+If pip does not work, please try the command using pip3 instead:
+
+`pip3 install --target ./package requests`
 
 After having installed the requests library, we can now move onto coding the function to respond to a Meraki event.
-
-

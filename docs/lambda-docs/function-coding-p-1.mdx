@@ -4,9 +4,10 @@ sidebar_position: 4
 
 # Function Code Part 1
 
-With the explanation of the `lambda_handler` code done, we can now start adding code to the handler to handle an event.
+With the explanation of the `lambda_handler` code done, we can now start adding code to the handler to respond to Meraki events.
 
-For our example, we want to receive a `port disconnected` alert and then call out to the Meraki Dashbaord to shutdown the port.  We need to determine what data we need to find from the alert that the Meraki Dashbaord will use to shutdown the port. In the below JSON the highlighted lines will show what data we need:
+For our example, we want to receive a `port disconnected` alert and then call out to the Meraki Dashboard to shutdown the port. We need to determine what data we need from the port disconnected alert in order to initiate a shutdown of the same port. In the below JSON the highlighted lines will show what data we need:
+
 ```json showLineNumbers
 {
   "version": "0.1",
@@ -21,9 +22,7 @@ For our example, we want to receive a `port disconnected` alert and then call ou
   "networkTags": [],
   //highlight-next-line
   "deviceSerial": "Q00Y-U00R-T00G",
-  //highlight-next-line
   "deviceMac": "00:00:00:d7:14:83",
-  //highlight-next-line
   "deviceName": "Home MX",
   "deviceUrl": "https://n471.meraki.com/ex_net/n/000000/manage/nodes/new_wired_status",
   "deviceTags": [],
@@ -46,12 +45,12 @@ For our example, we want to receive a `port disconnected` alert and then call ou
 }
 ```
 
-Looking through the above JSON, we know we need the serial number, port number, and the status of the port.
+Looking through the above JSON, we know we need the serial number, port number, alert type, and the status of the port.
 
-We always want to check if we get the alert we want and if the data we want is there as well. We want to check the alert type, if the metatdata exists, and the status of the port before we continue running the function. Otherwise the function should exit as quickly as possible. 
+We want to check the alert type, if the metatdata exists, and the status of the port before we continue running the function. Otherwise the function should exit as quickly as possible.
 If all the checks pass, we will import the python `requests` library to make the API call to Meraki later.
 
-We will add the highlighted lines to the ```lambda_handler```.
+We will add the highlighted lines to the `lambda_handler`.
 
 ```python title='lambda_function.py showLineNumbers'
 import json
@@ -99,11 +98,15 @@ def lambda_handler(event, context):
           #remove-line
             'statusCode': 200,
           #remove-line
-            'body': json.dumps('Not a downed port')
+            'body': json.dumps('Hello from Lambda!')
           #remove-line
         }
 ```
 
+:::info
+Green highlighted lines in the code sample are lines that we are adding to our code.  
+Red highlighted lines are the lines we are removing from the code.
+:::
 Now that we know the port will be down and the `requests` library is imported, we now need to store the information we need to make the API call.
 
 ```python title='lambda_function.py showLineNumbers'
@@ -115,7 +118,7 @@ def lambda_handler(event, context):
       'statusCode': 200,
       'body': json.dumps('Not a downed port')
     }
-    
+
   if 'alertData' not in event:
     return {
       'statusCode': 200,
@@ -136,11 +139,5 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Not a downed port')
       }
-      
+
 ```
-
-
-
-
-
-

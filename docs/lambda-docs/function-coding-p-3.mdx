@@ -5,7 +5,9 @@ sidebar_position: 6
 # Function Code Part 3
 
 ## The issue with using the API Gateway
+
 When using the API Gateway in front of a Lambda function, the API Gateway adds an additional layer of data that is sent to the Lambda function. Here is an example:
+
 ```json showLineNumbers
 {
   "resource": "/",
@@ -44,7 +46,8 @@ When using the API Gateway in front of a Lambda function, the API Gateway adds a
 }
 ```
 
-The API Gateway encapsulates the original event and puts it into the `body` parameter of its body.  So we do not run into any issues parsing our data that comes from the API Gateway, we need to add these lines to the beginning of our Lambda function.
+The API Gateway encapsulates the original event and puts it into the `body` parameter of its body. This example has the `body` set to `null`, but our request will have data here. So we do not run into any issues parsing our data that comes from the API Gateway, we need to add these lines to the beginning of our Lambda function.
+
 ```python title='lambda_function.py showLineNumbers
 import json
 import os
@@ -58,7 +61,7 @@ def lambda_handler(event, context):
       'statusCode': 200,
       'body': json.dumps('Not a downed port')
     }
-    
+
   if 'alertData' not in event:
     return {
       'statusCode': 200,
@@ -97,6 +100,7 @@ def lambda_handler(event, context):
 ```
 
 The completed API Gateway compatible code is below:
+
 ```python title='lambda_function.py showLineNumbers
 import json
 import os
@@ -108,7 +112,7 @@ def lambda_handler(event, context):
       'statusCode': 200,
       'body': json.dumps('Not a downed port')
     }
-    
+
   if 'alertData' not in event:
     return {
       'statusCode': 200,
