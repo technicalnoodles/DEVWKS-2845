@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## Create the API Gateway
 
-Now that we have a working Lambda function, we can add an API gateway to receive request. This process is much quicker than creating the Lambda function.
+Now that we have a working Lambda function, we can add an API gateway to receive the request. This process is much quicker than creating the Lambda function.
 
 To add the API gateway to our function, we need to add a `trigger`, use the API Gateway as the trigger and leave the auth open.
 
@@ -27,6 +27,6 @@ Click on **Add** on the bottom to create the new API Gateway. If the creation wa
 ### Update Meraki Dashboard Webhooks
 
 Copy the **API endpoint** URL of the new trigger and open the Meraki Dashboard. Go to `Network-wide -> Alerts` and scroll down to the **Webhooks** section. Click on **Add an HTTPS receiver**.
-Give the webhook a meaningful name, we used `aws` and paste the API Endpoint URL into the **URL** box. Click on **Save** at the bottom of the page.
+Give the webhook a meaningful name, (we used `aws`) and paste the API Endpoint URL into the **URL** box. Click on **Save** at the bottom of the page.
 
 We have now configured an API Gateway to be used with the Lambda function and can now test the functionality.

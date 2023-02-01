@@ -50,7 +50,12 @@ Looking through the above JSON, we know we need the serial number, port number, 
 We want to check the alert type, if the metatdata exists, and the status of the port before we continue running the function. Otherwise the function should exit as quickly as possible.
 If all the checks pass, we will import the python `requests` library to make the API call to Meraki later.
 
-We will add the highlighted lines to the `lambda_handler`.
+We will add the greeen highlighted lines to the `lambda_handler` and remove the red ones.
+
+:::info
+Green highlighted lines in the code are lines that we are adding to our code.  
+Red highlighted lines are the lines we are removing from the code.
+:::
 
 ```python title='lambda_function.py showLineNumbers'
 import json
@@ -59,7 +64,7 @@ def lambda_handler(event, context):
   #remove-line
     # TODO implement
     #add-line
-    if event['alertTypeId'] != 'port_disconnected':
+  if event['alertTypeId'] != 'port_disconnected':
 #add-line
     return {
       #add-line
@@ -79,35 +84,30 @@ def lambda_handler(event, context):
       #add-line
     }
     #add-line
-    if event['alertData']['status'] == 'down':
+  if event['alertData']['status'] == 'down':
       #add-line
-        import requests
+      import requests
     #add-line
-    else:
+  else:
       #add-line
-      return {
-          #add-line
-          'statusCode': 200,
-          #add-line
-          'body': json.dumps('Not a downed port')
-          #add-line
-        }
-
-  #remove-line
     return {
-          #remove-line
-            'statusCode': 200,
-          #remove-line
-            'body': json.dumps('Hello from Lambda!')
-          #remove-line
-        }
+          #add-line
+      'statusCode': 200,
+          #add-line
+      'body': json.dumps('Not a downed port')
+          #add-line
+      }
+  #remove-line
+  return {
+        #remove-line
+    'statusCode': 200,
+        #remove-line
+    'body': json.dumps('Hello from Lambda!')
+        #remove-line
+    }
 ```
 
-:::info
-Green highlighted lines in the code sample are lines that we are adding to our code.  
-Red highlighted lines are the lines we are removing from the code.
-:::
-Now that we know the port will be down and the `requests` library is imported, we now need to store the information we need to make the API call.
+Now that we know the port will be down and the `requests` library is imported, we now need to store the information we need to make the API call. Add the green highlighted lines to the file.
 
 ```python title='lambda_function.py showLineNumbers'
 import json
@@ -118,7 +118,6 @@ def lambda_handler(event, context):
       'statusCode': 200,
       'body': json.dumps('Not a downed port')
     }
-
   if 'alertData' not in event:
     return {
       'statusCode': 200,
@@ -139,5 +138,4 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Not a downed port')
       }
-
 ```

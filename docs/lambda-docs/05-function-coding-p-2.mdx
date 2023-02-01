@@ -57,7 +57,6 @@ def lambda_handler(event, context):
       'statusCode': 200,
       'body': json.dumps('Not a downed port')
     }
-
   if 'alertData' not in event:
     return {
       'statusCode': 200,
@@ -73,13 +72,11 @@ def lambda_handler(event, context):
     #the payload we need to create will be an object that contains the 'enabled' boolean and it will be set to false
     #add-line
     payload = '{ "enabled": false }'
-
   else:
     return {
         'statusCode': 200,
         'body': json.dumps('Not a downed port')
       }
-
 ```
 
 ## API headers
