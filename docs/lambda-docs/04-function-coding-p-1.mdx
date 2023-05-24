@@ -50,14 +50,14 @@ Looking through the above JSON, we know we need the serial number, port number, 
 We want to check the alert type, if the metatdata exists, and the status of the port before we continue running the function. Otherwise the function should exit as quickly as possible.
 If all the checks pass, we will import the python `requests` library to make the API call to Meraki later.
 
-We will add the greeen highlighted lines to the `lambda_handler` and remove the red ones.
+We will add the green highlighted lines to the `lambda_handler` and remove the red ones.
 
 :::info
 Green highlighted lines in the code are lines that we are adding to our code.  
 Red highlighted lines are the lines we are removing from the code.
 :::
 
-```python title='lambda_function.py showLineNumbers'
+```python title='lambda_function.py' showLineNumbers
 import json
 
 def lambda_handler(event, context):
@@ -109,7 +109,7 @@ def lambda_handler(event, context):
 
 Now that we know the port will be down and the `requests` library is imported, we now need to store the information we need to make the API call. Add the green highlighted lines to the file.
 
-```python title='lambda_function.py showLineNumbers'
+```python title=lambda_function.py showLineNumbers
 import json
 
 def lambda_handler(event, context):
