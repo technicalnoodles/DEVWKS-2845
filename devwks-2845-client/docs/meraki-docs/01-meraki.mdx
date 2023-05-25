@@ -8,7 +8,7 @@ In this section, we will go through the process of obtaining a Meraki API key an
 
 First we need to sign in to the Meraki dashboard using [dashboard.meraki.com](https://dashboard.meraki.com).
 
-It should take you to a login page for the Meraki Dashboard. Please sign in using the credentials provided to you. If asked for an Organizaiotn to log into. Please choose the `CiscoLive` organization.
+It should take you to a login page for the Meraki Dashboard. Please sign in using the credentials provided to you. If asked for an Organization to log into. Please choose the `CiscoLive` organization.
 
 After getting logged in, we need to generate an API key.
 
@@ -31,7 +31,20 @@ Now we need to find our Organization ID.
 Since we are in the profile page, scroll all the way to the bottom. In the footer, there will be some text mentioning the last login from your current IP. Below that information is the Organization ID. Copy that value and save it in the same file as the API key. It should look similar to the image below:  
 ![org id](../img/meraki/ord-id.png)
 
+Make a copy of this
+
 ## Get the Network ID
+
+If you look on the left hand side of the page, we'll have:
+
+`Network`
+`traineeX`
+
+`Systems Manager`
+
+If you click on `Systems Manager` then `General` and scroll to the bottom, in the `SecureX` section, you should see the ***Network ID*** Make a copy of this.
+
+***Alternatively*** if you are doing this in the future, you can get the Network ID a different way using the Meraki Dashboard API
 
 Go to the [Meraki Developer](https://developer.cisco.com/meraki/api-latest/) documentation. Once here, please search for `Get Organization Networks` in the search bar on the left. It should load the API page for that call. Now click on the `Configuration` button on the right side. Replace the `APIKey in header` field with the one you generated earlier. The rest can be left alone, click `Save`.
 
