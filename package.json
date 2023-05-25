@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-docs": "rm -rf ./docs && cd devwks-2845-client && npm run build && mkdir ../docs && cp -R ./build ../docs"
+    "build-docs": "rm -rf ./docs && cd devwks-2845-client && rm -rf ./build && npm run build && cd ./build && mkdir ../../docs && cp -R . ../../docs"
   },
   "repository": {
     "type": "git",
