@@ -8,11 +8,11 @@ We first need to create a webhook template and then use the Meraki API to push t
 
 ## Create Webhook Template
 
-This ***may*** be done using the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/) for future projects, but, for the purposes of this session, we ar going to edit an already created template.
+This **_may_** be done using the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/) for future projects, but, for the purposes of this session, we ar going to edit an already created template.
 
 ### Log in to Cisco IDE
 
-In your browser, open [Meraki Automation Library](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) These are a bunch of scripts that have been created as proof of concepts for customers in the past. ***Mote*** Feel free to peruse these at your leisure.
+In your browser, open [Meraki Automation Library](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) These are a bunch of scripts that have been created as proof of concepts for customers in the past. **_Mote_** Feel free to peruse these at your leisure.
 
 However, the Cisco IDE allows us to run these scripts without having to download them. To do so, click the [Run in Cloud IDE](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) button.
 
@@ -26,7 +26,7 @@ Webex
 
 Credentials. Once logged in, you'll be presented with
 
-![Cisco IDE Home](../../static/img/meraki/01-ciscoIDEstart.png)
+![Cisco IDE Home](../img/meraki/01-ciscoIDEstart.png)
 
 From here, you'll be able to click the `> Cisco Live` folder. This should expand, showing the `UploadCustomWebhookTemplate.py` file. Click on this to show it in the editor.
 
@@ -39,30 +39,30 @@ Now, in order to achieve our objective later of disabling a port, we are going t
 Where we have `\n\"deviceSerial\": \"{{deviceSerial}}\"` we are going to replace `\"{{deviceSerial}}\"` with \"Q2EW-CTL2-MQRL\"
 
 :::tip
-It's imperative that, within the quotes, that you have just the ***serial number*** as above, with no curly brackets, so
+It's imperative that, within the quotes, that you have just the **_serial number_** as above, with no curly brackets, so
 
 `\n\"deviceSerial\": \"Q2EW-CTL2-MQRL\"`
 :::
 
 ### change directory and Installing Requests
 
-At the bottom of the screen, you should see a ***Termina*** window. If it's ***NOT*** showing, click on `Terminal`
+At the bottom of the screen, you should see a **_Termina_** window. If it's **_NOT_** showing, click on `Terminal`
 
-![IDE Terminal Window](../../static/img/meraki/02-terminalWindow.png)
+![IDE Terminal Window](../img/meraki/02-terminalWindow.png)
 
 Firstly, type:
 
-`cd CiscoLive` and then ***ENTER***
+`cd CiscoLive` and then **_ENTER_**
 
-Now, we need to install the ***Requests*** package. This is essential for making API calls:
+Now, we need to install the **_Requests_** package. This is essential for making API calls:
 
 Type:
 
 `pip3 install requests`
 
-The ***requests*** package should install as shown:
+The **_requests_** package should install as shown:
 
-![Installing requests package](../../static/img/meraki/03-installingRequests.png)
+![Installing requests package](../img/meraki/03-installingRequests.png)
 
 ### Running the code!
 
@@ -73,17 +73,17 @@ Your Network ID
 
 And
 
-A name you wish to give the webhook. ***TraineeXXCWH*** where ***XX*** is your trainee number may be a good suggestion
+A name you wish to give the webhook. **_TraineeXXCWH_** where **_XX_** is your trainee number may be a good suggestion
 
 We need to type in the following to run the code:
 
 `python3 UploadCustomWebhookTemplate.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXXCWH"`
 
-Press ***Enter*** when ready...
+Press **_Enter_** when ready...
 
 The API call should run, and, if successful, should show:
 
-![API Call results](../../static/img/meraki/04-SuccessfulAPICall.png)
+![API Call results](../img/meraki/04-SuccessfulAPICall.png)
 
 We can also check by going to, in the Meraki Dashboard:
 
@@ -91,17 +91,9 @@ We can also check by going to, in the Meraki Dashboard:
 
 Click `Add an HTTPS receiver`
 
-Under ***Payload Template*** click the drop down box, and you should see:
+Under **_Payload Template_** click the drop down box, and you should see:
 
-![Custom Webhook template Installed](../../static/img/meraki/04-05-CustomWHTInstalled.png)
-
-
-
-
-
-
-
-
+![Custom Webhook template Installed](../img/meraki/05-CustomWHTInstalled.png)
 
 # Using the Meraki API & Webhooks
 
@@ -246,5 +238,3 @@ Now, you can copy this command this command and run it in the terminal. You shou
 ```
 
 This means our webhook has been added to the Meraki Dashboard. We can go ahead and start creating the Lambda Function.
-
-
