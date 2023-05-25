@@ -8,6 +8,102 @@ We first need to create a webhook template and then use the Meraki API to push t
 
 ## Create Webhook Template
 
+This ***may*** be done using the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/) for future projects, but, for the purposes of this session, we ar going to edit an already created template.
+
+### Log in to Cisco IDE
+
+In your browser, open [Meraki Automation Library](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) These are a bunch of scripts that have been created as proof of concepts for customers in the past. ***Mote*** Feel free to peruse these at your leisure.
+
+However, the Cisco IDE allows us to run these scripts without having to download them. To do so, click the [Run in Cloud IDE](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) button.
+
+You'll be prompted to log in using:
+
+Github
+Google
+Facebook
+Cisco ID
+Webex
+
+Credentials. Once logged in, you'll be presented with
+
+![Cisco IDE Home](../../static/img/meraki/01-ciscoIDEstart.png)
+
+From here, you'll be able to click the `> Cisco Live` folder. This should expand, showing the `UploadCustomWebhookTemplate.py` file. Click on this to show it in the editor.
+
+### Editting the code
+
+Now, in order to achieve our objective later of disabling a port, we are going to make a small change to the line:
+
+`webhookTemplatePayload = "{\n\"version\": \"0.1\",\n\"sharedSecret\": \"{{sharedSecret}}\",\n\"sentAt\": \"{{sentAt}}\",\n\"organizationId\": \"{{organizationId}}\",\n\"organizationName\": \"{{organizationName}}\",\n\"organizationUrl\": \"{{organizationUrl}}\",\n\"networkId\": \"{{networkId}}\",\n\"networkName\": \"{{networkName}}\",\n\"networkUrl\": \"{{networkUrl}}\",\n\"networkTags\": {{ networkTags | jsonify }},\n\"deviceSerial\": \"{{deviceSerial}}\",\n\"deviceMac\": \"{{deviceMac}}\",\n\"deviceName\": \"{{deviceName}}\",\n\"deviceUrl\": \"{{deviceUrl}}\",\n\"deviceTags\": {{ deviceTags | jsonify }},\n\"deviceModel\": \"{{deviceModel}}\",\n\"alertId\": \"{{alertId}}\",\n\"alertType\": \"{{alertType}}\",\n\"alertTypeId\": \"{{alertTypeId}}\",\n\"alertLevel\": \"{{alertLevel}}\",\n\"occurredAt\": \"{{occurredAt}}\",\n\"alertData\": {{ alertData | jsonify }}\n}\n"`
+
+Where we have `\n\"deviceSerial\": \"{{deviceSerial}}\"` we are going to replace `\"{{deviceSerial}}\"` with \"Q2EW-CTL2-MQRL\"
+
+:::tip
+It's imperative that, within the quotes, that you have just the ***serial number*** as above, with no curly brackets, so
+
+`\n\"deviceSerial\": \"Q2EW-CTL2-MQRL\"`
+:::
+
+### change directory and Installing Requests
+
+At the bottom of the screen, you should see a ***Termina*** window. If it's ***NOT*** showing, click on `Terminal`
+
+![IDE Terminal Window](../../static/img/meraki/02-terminalWindow.png)
+
+Firstly, type:
+
+`cd CiscoLive` and then ***ENTER***
+
+Now, we need to install the ***Requests*** package. This is essential for making API calls:
+
+Type:
+
+`pip3 install requests`
+
+The ***requests*** package should install as shown:
+
+![Installing requests package](../../static/img/meraki/03-installingRequests.png)
+
+### Running the code!
+
+For this, you'll need:
+
+Your API Key
+Your Network ID
+
+And
+
+A name you wish to give the webhook. ***TraineeXXCWH*** where ***XX*** is your trainee number may be a good suggestion
+
+We need to type in the following to run the code:
+
+`python3 UploadCustomWebhookTemplate.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXXCWH"`
+
+Press ***Enter*** when ready...
+
+The API call should run, and, if successful, should show:
+
+![API Call results](../../static/img/meraki/04-SuccessfulAPICall.png)
+
+We can also check by going to, in the Meraki Dashboard:
+
+`Systems Manager > Alerts > Webhooks`
+
+Click 
+
+
+
+
+
+
+
+
+# Using the Meraki API & Webhooks
+
+We first need to create a webhook template and then use the Meraki API to push the webhook template to the Dashboard.
+
+## Create Webhook Template
+
 Since we have the API key and Organization ID from the Meraki Dashboard, let's create the custom webhook template. Go to the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/)
 
 Once there we need to load a pre-done template. We can do this by changing the dropdown on the left side that say `Templates` to `Meraki`. It should now look like the below:  
