@@ -10,25 +10,91 @@ We first need to create a webhook template and then use the Meraki API to push t
 
 This **_may_** be done using the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/) for future projects, but, for the purposes of this session, we ar going to edit an already created template.
 
-### Log in to Cisco IDE
+## Download Code to be run locally
 
-In your browser, open [Meraki Automation Library](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) These are a bunch of scripts that have been created as proof of concepts for customers in the past. **_Mote_** Feel free to peruse these at your leisure.
+We are going to use some existing code to create our Custom Webhook Template:
 
-However, the Cisco IDE allows us to run these scripts without having to download them. To do so, click the [Run in Cloud IDE](https://developer.cisco.com/codeexchange/github/repo/meraki/automation-scripts/) button.
+```python title='UploadCustomWebhookTemplate.py showLineNumbers'
+# this script, for a given
+# - API key
+# - NetworkID
+# - Webhook Template Name
+# creates a new custom webhook template
+# API information available here: https://developer.cisco.com/meraki/webhooks/#!custom-payload-templates-overview
+# precreated templates available here: https://github.com/meraki/webhook-payload-templates
+# further training available here: https://developer.cisco.com/learning/labs/meraki-webhook-template-editor-intro/create-your-custom-webhook-template/
+# postman collection: https://www.postman.com/meraki-api/workspace/cisco-meraki-s-public-workspace/collection/897512-c65299ed-39a5-4b02-bb4e-933c738bfcdf?action=share&creator=897512&ctx=documentation
 
-You'll be prompted to log in using:
+import sys, requests, json, getopt
 
-Github
-Google
-Facebook
-Cisco ID
-Webex
 
-Credentials. Once logged in, you'll be presented with
+def main(argv):
+    ARG_APIKEY = ''
+    ARG_NAME = ''
+    ARG_NETWORKID = ''
 
-![Cisco IDE Home](../img/meraki/01-ciscoIDEstart.png)
+    try:
+        opts, args = getopt.getopt(argv, 'hk:n:i:')
+    except getopt.GetoptError:
+        printhelp()
+        sys.exit(2)
 
-From here, you'll be able to click the `> Cisco Live` folder. This should expand, showing the `UploadCustomWebhookTemplate.py` file. Click on this to show it in the editor.
+    for opt, arg in opts:
+        if opt == '-h':
+            printhelp()
+            sys.exit()
+        elif opt == '-k':
+            ARG_APIKEY = arg
+        elif opt == '-n':
+            ARG_NETWORKID = arg
+        elif opt == '-i':
+            ARG_NAME = arg
+
+        # check that all mandatory arguments have been given
+    if ARG_APIKEY == '' or ARG_NETWORKID == '' or ARG_NAME == '':
+        printhelp()
+        sys.exit(2)
+
+    webhookTemplatePayload = "{\n\"version\": \"0.1\",\n\"sharedSecret\": \"{{sharedSecret}}\",\n\"sentAt\": \"{{sentAt}}\",\n\"organizationId\": \"{{organizationId}}\",\n\"organizationName\": \"{{organizationName}}\",\n\"organizationUrl\": \"{{organizationUrl}}\",\n\"networkId\": \"{{networkId}}\",\n\"networkName\": \"{{networkName}}\",\n\"networkUrl\": \"{{networkUrl}}\",\n\"networkTags\": {{ networkTags | jsonify }},\n\"deviceSerial\": \"{{deviceSerial}}\",\n\"deviceMac\": \"{{deviceMac}}\",\n\"deviceName\": \"{{deviceName}}\",\n\"deviceUrl\": \"{{deviceUrl}}\",\n\"deviceTags\": {{ deviceTags | jsonify }},\n\"deviceModel\": \"{{deviceModel}}\",\n\"alertId\": \"{{alertId}}\",\n\"alertType\": \"{{alertType}}\",\n\"alertTypeId\": \"{{alertTypeId}}\",\n\"alertLevel\": \"{{alertLevel}}\",\n\"occurredAt\": \"{{occurredAt}}\",\n\"alertData\": {{ alertData | jsonify }}\n}\n"
+
+    url = "https://api.meraki.com/api/v1/networks/" + ARG_NETWORKID + "/webhooks/payloadTemplates"
+
+    payload = json.dumps({
+        "name": ARG_NAME,
+        "body": webhookTemplatePayload
+    })
+
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-Cisco-Meraki-API-Key": ARG_APIKEY
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.status_code)
+    print(response.text)
+
+
+def printhelp():
+    print("this script, for a given")
+    print("-k API key")
+    print("-n NetworkID")
+    print("-i Webhook Template Name")
+    print("creates a new custom webhook template")
+    print("The only editing it needs is the webhook template payload")
+    print("")
+    print("API information available here: https://developer.cisco.com/meraki/webhooks/#!custom-payload-templates-overview")
+    print("precreated templates available here: https://github.com/meraki/webhook-payload-templates")
+    print("further training available here: https://developer.cisco.com/learning/labs/meraki-webhook-template-editor-intro/create-your-custom-webhook-template/")
+    print("postman collection: https://www.postman.com/meraki-api/workspace/cisco-meraki-s-public-workspace/collection/897512-c65299ed-39a5-4b02-bb4e-933c738bfcdf?action=share&creator=897512&ctx=documentation")
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
+```
+
+Copy the above code into a text editor and save as **UploadCustomWebhookTemplate.py** to your Desktop
 
 ### Editting the code
 
@@ -46,7 +112,7 @@ It's imperative that, within the quotes, that you have just the **_serial number
 
 ### change directory and Installing Requests
 
-At the bottom of the screen, you should see a **_Termina_** window. If it's **_NOT_** showing, click on `Terminal`
+At the bottom of the screen, you should see a **_Terminal_** window. If it's **_NOT_** showing, click on `Terminal`
 
 ![IDE Terminal Window](../img/meraki/02-terminalWindow.png)
 
