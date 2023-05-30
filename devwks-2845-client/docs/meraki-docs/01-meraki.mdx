@@ -42,12 +42,16 @@ If you look on the left hand side of the page, we'll have:
 
 `Systems Manager`
 
-If you click on `Systems Manager` then `General` and scroll to the bottom, in the `SecureX` section, you should see the ***Network ID*** Make a copy of this.
+If you click on `Systems Manager` then `General` and scroll to the bottom, in the `SecureX` section, you should see the **_Network ID_** Make a copy of this.
 
-***Alternatively*** if you are doing this in the future, you can get the Network ID a different way using the Meraki Dashboard API
+:::note
+
+**_Alternatively_** if you are doing this in the future, you can get the Network ID a different way using the Meraki Dashboard API
 
 Go to the [Meraki Developer](https://developer.cisco.com/meraki/api-latest/) documentation. Once here, please search for `Get Organization Networks` in the search bar on the left. It should load the API page for that call. Now click on the `Configuration` button on the right side. Replace the `APIKey in header` field with the one you generated earlier. The rest can be left alone, click `Save`.
 
 Still on the right side, please enter the Organization ID we obtained earlier in the `Organization Id` box. Then click on `Run`. It will return the networks associated with your account. Near the bottom, your network should should up. It wil be named after your username. Please save the `id` field.
+
+:::
 
 Now we can start working with the Meraki API and a create a custom webhook.
