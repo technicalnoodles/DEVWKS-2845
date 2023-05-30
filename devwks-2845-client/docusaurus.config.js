@@ -89,11 +89,11 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
         magicComments: [
-          // {
-          //   className: 'theme-code-block-highlighted-line',
-          //   line: 'highlight-next-line',
-          //   block: { start: 'highlight-start', end: 'highlight-end' },
-          // },
+          {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: { start: 'highlight-start', end: 'highlight-end' },
+          },
           {
             className: 'code-block-success-line',
             line: 'add-line',

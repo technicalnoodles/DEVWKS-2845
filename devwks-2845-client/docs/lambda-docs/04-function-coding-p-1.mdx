@@ -8,7 +8,7 @@ With the explanation of the `lambda_handler` code done, we can now start adding 
 
 For our example, we want to receive a `port disconnected` alert and then call out to the Meraki Dashboard to shutdown the port. We need to determine what data we need from the port disconnected alert in order to initiate a shutdown of the same port. In the below JSON the highlighted lines will show what data we need:
 
-```json showLineNumbers
+```js showLineNumbers
 {
   "version": "0.1",
   "sharedSecret": "",
@@ -37,7 +37,7 @@ For our example, we want to receive a `port disconnected` alert and then call ou
     //highlight-next-line
     "portNum": 3,
     "description": "Switch port is down",
-    //highlight-next-line
+    // highlight-next-line
     "status": "down",
     "prevStatus": "100 Gbps",
     "portDesc": "Corp Access"
