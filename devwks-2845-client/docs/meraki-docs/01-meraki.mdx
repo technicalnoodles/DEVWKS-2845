@@ -8,7 +8,7 @@ In this section, we will go through the process of obtaining a Meraki API key an
 
 First we need to sign in to the Meraki dashboard using [dashboard.meraki.com](https://dashboard.meraki.com).
 
-It should take you to a login page for the Meraki Dashboard. Please sign in using the credentials provided to you. If asked for an Organization to log into. Please choose the `CiscoLive` organization.
+It should take you to a login page for the Meraki Dashboard. Please sign in using the credentials provided to you. If asked for an Organization to log into, please choose the `CiscoLive` organization.
 
 After getting logged in, we need to generate an API key.
 
@@ -33,13 +33,13 @@ Since we are in the profile page, scroll all the way to the bottom. In the foote
 
 ## Get the Network ID
 
-If you look on the left hand side of the page, we'll have:
+On the left side of the page please hover over `Network` and select the trainee network that is the same as your login ID.
 
-`Network` -> `traineeX` -> `Systems Manager`
+`Network` -> `traineeX`.
 
-Where the **X** is the number of your trainee login.
+It should look like the above where the **X** is the number of your trainee login.
 
-If you click on `Systems Manager` then `General` and scroll to the bottom, in the `SecureX` section, you should see the **_Network ID_** Make a copy of this.
+Select `Systems Manager` then `General` and scroll to the bottom. In the `SecureX` section, you should see the **_Network ID_**. Make a copy of this.
 
 :::note
 
@@ -47,7 +47,7 @@ If you click on `Systems Manager` then `General` and scroll to the bottom, in th
 
 Go to the [Meraki Developer](https://developer.cisco.com/meraki/api-latest/) documentation. Once here, please search for `Get Organization Networks` in the search bar on the left. It should load the API page for that call. Now click on the `Configuration` button on the right side. Replace the `APIKey in header` field with the one you generated earlier. The rest can be left alone, click `Save`.
 
-Still on the right side, please enter the Organization ID we obtained earlier in the `Organization Id` box. Then click on `Run`. It will return the networks associated with your account. Near the bottom, your network should should up. It wil be named after your username. Please save the `id` field.
+Still on the right side, please enter the Organization ID we obtained earlier in the `Organization Id` box. Then click on `Run`. It will return the networks associated with your account. Near the bottom, your network should show up. It will be named after your username. Please save the `id` field.
 
 :::
 

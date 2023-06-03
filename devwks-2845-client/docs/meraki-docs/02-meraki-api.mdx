@@ -6,7 +6,7 @@ sidebar_position: 2
 
 We first need to create a webhook template and then use the Meraki API to push the webhook template to the Dashboard.
 
-:::note
+:::info
 
 When using the workstation, you should already have a code editor (VSCode) open with a terminal at the bottom. You can create all files, edit code, and run commands using this editor.
 
@@ -135,13 +135,15 @@ It's imperative that, within the quotes, you have just the **_serial number_** a
 `\n\"deviceSerial\": \"Q2EW-CTL2-MQRL\"`
 :::
 
-Secondly, where we have the line `\n\"alertData\": {\"portNum\": 1 , \ ` change the number 1 to your attendee ID
+Secondly, where we have the line `\n\"alertData\": {\"portNum\": 1 , \ ` change the number 1 to your attendee ID.
+
+Save the file again.
 
 ### Installing the Requests Library
 
-Open the **Terminal** application, if it is not already open in the code editor, and change directory to where you saved **UploadCustomWebhookTemplate.py** as above
+Open the **Terminal** application, if it is not already open in the code editor, and change the directory to where you saved **UploadCustomWebhookTemplate.py** if the terminal is not already there.
 
-We will next need to install the **_Requests_** package. This is essential for making API calls:
+We need to install the **_Requests_** package. This is essential for making API calls:
 
 Type:
 
@@ -153,16 +155,16 @@ The **_requests_** package should install as shown:
 
 ### Running the code!
 
-For this, you'll need:
+For this, you'll need your:
 
-Your API Key
-Your Network ID
+- API Key
+- Network ID
 
 And
 
-Give the webhook a meaningful name. A suggestion is to use **_TraineeXX_** where **_XX_** is your trainee number.
+A meaningful name for the webhook. A suggestion is to use **_TraineeXX_** where **_XX_** is your trainee number.
 
-We need to type in the following to run the code:
+The below is how to run the command and you will need to replace each stared word (and the stars) with the subsequent data you got earlier:
 
 `python3 UploadCustomWebhookTemplate.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXX"`
 
@@ -172,13 +174,11 @@ The API call should run, and, if successful, should show:
 
 ![API Call results](../img/meraki/04-SuccessfulAPICall.png)
 
-We can also check by going to, in the Meraki Dashboard:
-
-`Systems Manager > Alerts > Webhooks`
+We can also check by going to `Systems Manager > Alerts > Webhooks` in the Meraki Dashboard.
 
 Click `Add an HTTPS receiver`
 
-Under **_Payload Template_** click the drop down box, and you should see something similar to what is in the image below:
+Under **_Payload Template_** click the drop down box, and under _Custom templates_ you should see something the webhook template you just created. Similar to what is in the image below:
 
 ![Custom Webhook template Installed](../img/meraki/05-CustomWHTInstalled.png)
 

@@ -3,6 +3,6 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "This section will take you the the setup to generate a Meraki API key and create a custom Webhook template to be used for the dashboard alerting."
+    "description": "This section will take you through the setup to generate a Meraki API key and create a custom Webhook template to be used for the dashboard alerting."
   }
 }
