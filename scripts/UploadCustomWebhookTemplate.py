@@ -38,7 +38,32 @@ def main(argv):
         printhelp()
         sys.exit(2)
 
-    webhookTemplatePayload = "{\n\"version\": \"0.1\",\n\"sharedSecret\": \"{{sharedSecret}}\",\n\"sentAt\": \"{{sentAt}}\",\n\"organizationId\": \"{{organizationId}}\",\n\"organizationName\": \"{{organizationName}}\",\n\"organizationUrl\": \"{{organizationUrl}}\",\n\"networkId\": \"{{networkId}}\",\n\"networkName\": \"{{networkName}}\",\n\"networkUrl\": \"{{networkUrl}}\",\n\"networkTags\": {{ networkTags | jsonify }},\n\"deviceSerial\": \"{{deviceSerial}}\",\n\"deviceMac\": \"{{deviceMac}}\",\n\"deviceName\": \"{{deviceName}}\",\n\"deviceUrl\": \"{{deviceUrl}}\",\n\"deviceTags\": {{ deviceTags | jsonify }},\n\"deviceModel\": \"{{deviceModel}}\",\n\"alertId\": \"{{alertId}}\",\n\"alertType\": \"{{alertType}}\",\n\"alertTypeId\": \"{{alertTypeId}}\",\n\"alertLevel\": \"{{alertLevel}}\",\n\"occurredAt\": \"{{occurredAt}}\",\n\"alertData\": {{ alertData | jsonify }}\n}\n"
+    webhookTemplatePayload = "{\n\"version\": \"0.1\", \
+                                \n\"sharedSecret\": \"{{sharedSecret}}\", \
+                                \n\"sentAt\": \"{{sentAt}}\", \
+                                \n\"organizationId\": \"{{organizationId}}\", \
+                                \n\"organizationName\": \"{{organizationName}}\", \
+                                \n\"organizationUrl\": \"{{organizationUrl}}\", \
+                                \n\"networkId\": \"{{networkId}}\", \
+                                \n\"networkName\": \"{{networkName}}\", \
+                                \n\"networkUrl\": \"{{networkUrl}}\", \
+                                \n\"networkTags\": {{ networkTags | jsonify }}, \
+                                \n\"deviceSerial\": \"{{deviceSerial}}\", \
+                                \n\"deviceMac\": \"{{deviceMac}}\", \
+                                \n\"deviceName\": \"{{deviceName}}\", \
+                                \n\"deviceUrl\": \"{{deviceUrl}}\", \
+                                \n\"deviceTags\": {{ deviceTags | jsonify }}, \
+                                \n\"deviceModel\": \"{{deviceModel}}\", \
+                                \n\"alertId\": \"{{alertId}}\", \
+                                \n\"alertType\": \"{{alertType}}\", \
+                                \n\"alertTypeId\": \"{{alertTypeId}}\", \
+                                \n\"alertLevel\": \"{{alertLevel}}\", \
+                                \n\"occurredAt\": \"{{occurredAt}}\", \
+                                \n\"alertData\": {\"portNum\": 1 , \
+                                                \"description\": \"Switch port is down\", \
+                                                \"status\": \"down\", \"prevStatus\": \
+                                                \"100 Gbps\",\"portDesc\": \"Corp Access\" \
+                                }\n}\n"
 
     url = "https://api.meraki.com/api/v1/networks/" + ARG_NETWORKID + "/webhooks/payloadTemplates"
 
