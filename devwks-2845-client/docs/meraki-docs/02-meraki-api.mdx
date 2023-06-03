@@ -6,13 +6,19 @@ sidebar_position: 2
 
 We first need to create a webhook template and then use the Meraki API to push the webhook template to the Dashboard.
 
+:::note
+
+When using the workstation, you should already have a code editor (VSCode) open with a terminal at the bottom. You can create all files, edit code, and run commands using this editor.
+
+:::
+
 ## Create Webhook Template
 
 This **_may_** be done using the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/) for future projects, but, for the purposes of this session, we are going to edit an already created template.
 
 ## Download Code to be run locally
 
-We are going to use some existing code to create our Custom Webhook Template:
+We are using the below code to create our Custom Webhook Template. Copy the code below using the copy button on the top right of the code block. Create a new file in the Code Editor called `UploadCustomWebhookTemplate.py` and paste the code you copied into it. Then save the file using `CTRL+S` or by going to `File -> Save` on the top left of the code editor window.
 
 ```python title='UploadCustomWebhookTemplate.py' showLineNumbers
 # this script, for a given
@@ -124,18 +130,16 @@ if __name__ == '__main__':
 Where we have `\n\"deviceSerial\": \"{{deviceSerial}}\"` we are going to replace `\"{{deviceSerial}}\"` with \"Q2EW-CTL2-MQRL\"
 
 :::tip
-It's imperative that, within the quotes, that you have just the **_serial number_** as above, with no curly brackets, so
+It's imperative that, within the quotes, you have just the **_serial number_** as above, with no curly brackets, so it will look like the below:
 
 `\n\"deviceSerial\": \"Q2EW-CTL2-MQRL\"`
 :::
 
 Secondly, where we have the line `\n\"alertData\": {\"portNum\": 1 , \ ` change the number 1 to your attendee ID
 
+### Installing the Requests Library
 
-
-### Open Terminal and Installing Requests
-
-Open the **Terminal** application, and change directory to where you saved **UploadCustomWebhookTemplate.py** as above
+Open the **Terminal** application, if it is not already open in the code editor, and change directory to where you saved **UploadCustomWebhookTemplate.py** as above
 
 We will next need to install the **_Requests_** package. This is essential for making API calls:
 
