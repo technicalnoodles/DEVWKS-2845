@@ -45,7 +45,7 @@ For our example, we want to receive a `port disconnected` alert and then call ou
 }
 ```
 
-Looking through the above JSON, we know we need the serial number, port number, alert type, and the status of the port.
+Looking through the above JSON, we know we need the serial number, port number, alert type ID, and the status of the port.
 
 We want to check the alert type, if the metatdata exists, and the status of the port before we continue running the function. Otherwise the function should exit as quickly as possible.
 If all the checks pass, we will import the python `requests` library to make the API call to Meraki later.
