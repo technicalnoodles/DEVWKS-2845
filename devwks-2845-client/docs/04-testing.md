@@ -6,7 +6,7 @@ sidebar_position: 5
 
 We have a few tests that we can perform to validate our deployment is going to work. We will check the Meraki Dashboard to validate that it can send webhooks to our API, then we will generate our own example to send, and finally we will have the Meraki Dashboard send a legitimate event to our API.
 
-## Test Meraki Webhook Test
+## Test Using The Meraki Dashboard
 
 Within the Meraki Dashboard on the Alerts page where we just setup a new webhook, click on the **Send test webhook** button to verify that Meraki can successfully send a webhook.
 
@@ -19,7 +19,7 @@ Let's test this with our own payload.
 
 Our payload will not shutdown a port but will show that we are receiving a response from our function successfully.
 
-In Postman we need to change the request to a `POST`` and paste in our API endpoint as the URL.
+In Postman we need to change the request to a `POST` and paste in our API endpoint as the URL.
 
 The test body of our request will be:
 
