@@ -11,58 +11,8 @@ We have a few tests that we can perform to validate our deployment is going to w
 Within the Meraki Dashboard on the Alerts page where we just setup a new webhook, click on the **Send test webhook** button to verify that Meraki can successfully send a webhook.
 
 After clicking on the button and waiting a little while, we should see a status of `delivered`, like the below image shows:
-![delivered webhook](../static/img/delivered-webhook.png)
+![delivered webhook](./img/delivered-webhook-2.png)
 
-Let's test this with our own payload.
+This webhook test we performed will send the template we created to the Lambda function and the Lambda function will detect that it is a port disconnected event. It will then reach back out to Meraki and shutdown your assigned port. To check if the port was successfully shutdown we can go to the `Switch` network and select the switch to see the port is now gray instead of black.
 
-## Test Using Postman
-
-Our payload will not shutdown a port but will show that we are receiving a response from our function successfully.
-
-In Postman we need to change the request to a `POST` and paste in our API endpoint as the URL.
-
-The test body of our request will be:
-
-```json
-{
-  "version": "0.1",
-  "sharedSecret": "",
-  "sentAt": "2023-01-13T19:57:07.307562Z",
-  "organizationId": "000000",
-  "organizationName": "EX net",
-  "organizationUrl": "https://n471.meraki.com/o/000000/manage/organization/overview",
-  "networkId": "N_00000000",
-  "networkName": "Ex net",
-  "networkUrl": "https://n471.meraki.com/ex_net/n/000000/manage/nodes/wired_status",
-  "networkTags": [],
-  "deviceSerial": "Q00P-0000-0003",
-  "deviceMac": "00:00:00:d7:14:83",
-  "deviceName": "Home MX",
-  "deviceUrl": "https://n471.meraki.com/ex_net/n/000000/manage/nodes/new_wired_status",
-  "deviceTags": [],
-  "deviceModel": "MX67W",
-  "alertId": "",
-  "alertType": "Switch port disconnected",
-  "alertTypeId": "port_connected",
-  "alertLevel": "warning",
-  "occurredAt": "2023-01-13T19:57:07.259607Z",
-  "alertData": {
-    "portNum": 2,
-    "description": "Switch port is down",
-    "status": "up",
-    "prevStatus": "100 Gbps",
-    "portDesc": "Corp Access"
-  }
-}
-```
-
-The headers will be `Content-Type` and `Accept`. Both will have a value of `application/json`.
-
-We can now send the request. We should get back a `Not a downed port` response.
-![not down port](../static/img/response.png)
-
-Lastly we can test using an actual event.
-
-## Live Event Test
-
-In the Meraki Dashboard we need to shutdown a port that is connected to another active port. This will cause the port to go down. After five minutes we should receive the webhook and the Lambda function will return `Port shutdown`.
+![shutdown port](./img/shut-port.png)

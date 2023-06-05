@@ -164,7 +164,17 @@ And
 
 A meaningful name for the webhook. A suggestion is to use **_TraineeXX_** where **_XX_** is your trainee number.
 
-The below is how to run the command and you will need to replace each stared word (and the stars) with the subsequent data you got earlier:
+The below is how to run the command and you will need to replace each starred word (and the stars) with the subsequent data you got earlier:
+
+:::caution
+
+If you run into an SSL error for urllib3 when running the script, please do the the below to fix it:
+
+`pip3 uninstall urllib3`
+
+`pip3 install urllib3==1.26.6`
+
+:::
 
 `python3 UploadCustomWebhookTemplate.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXX"`
 

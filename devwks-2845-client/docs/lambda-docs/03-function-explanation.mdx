@@ -98,4 +98,8 @@ If pip does not work, please try the command using pip3 instead:
 
 `pip3 install --target ./package requests`
 
-After having installed the requests library, we can now move onto coding the function to respond to a Meraki event.
+After having installed the requests library, we now need to change the version of urllib3 so we do not run into any SSL errors. Run the below command to install the correct version for the requests library to use.
+
+`pip3 install --upgrade --target ./package  urllib3==1.26.6`
+
+we can now move onto coding the function to respond to a Meraki event.
