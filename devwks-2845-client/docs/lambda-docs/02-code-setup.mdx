@@ -14,7 +14,13 @@ For our code to work later on in this workshop, we need to create an environment
 To create our environment variable, we need to select the **Configuration** tab underneath **Function overview**. After doing this, there will be an **Environment variables** tab on the left side. It should look similar to this image:
 ![Environment tab](../../static/img/env-tab.png)
 
-Select the **Environment variables** tab and then **Edit** it. Click on **Add environment variable**. Name the `key` `XCiscoMerakiAPIKey`. Then enter your Meraki API key as the `Value`. Then **Save** the configuration on the bottom right. It will look similar to this image except your `Value` will have something there:
+Select the **Environment variables** tab and then **Edit** it. Click on **Add environment variable**.
+
+Name the `key` **`XCiscoMerakiAPIKey`**.
+
+Then enter your Meraki API key as the `Value`.
+
+Then **Save** the configuration on the bottom right. It will look similar to this image except your `Value` will have something there:
 
 ![Environment variable](../../static/img/edit-environ.png)
 
@@ -41,14 +47,16 @@ The `Lambda Code Source Editor` has some limitations. If you require additional 
 
 :::
 
-The `Zip` option requires that we create a local folder for our code. On your computer please create a new folder named **shutdownPort** using your preferred method (CLI or GUI).
+The `Zip` option requires that we create a local folder for our code.
+
+On your computer please create a new folder named **shutdownPort** using your preferred method (CLI or GUI).
 
 Open this folder in Visual Studio Code. Select `File` on the top left of the editor, then click on `Open...` from the dropdown menu. Find the `shutdownPort` directory and select it. Then click on `Open`.
 
 Back in the AWS Lambda function, select the **Code** tab underneath **Function overview**. Then copy the code from the **Code Source** editor. Here is an example of where it is:
 ![Code Source Editor](../../static/img/code-source-editor.png)
 
-In the local code editor, create a new file called `lambda_function.py` and paste the code from the Lambda function into it.
+In the local code editor, create a new file called **`lambda_function.py`** and paste the code from the Lambda function into it.
 
 There should now be a file with the below code in the `shutdownPort` folder.
 

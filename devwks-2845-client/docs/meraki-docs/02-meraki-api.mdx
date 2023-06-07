@@ -18,9 +18,13 @@ This **_may_** be done using the [webhook builder](https://webhook-builder-vpfmu
 
 ## Download Code to be run locally
 
-We are using the below code to create our Custom Webhook Template. Copy the code below using the copy button on the top right of the code block. Create a new file in the Code Editor called `UploadCustomWebhookTemplate.py` and paste the code you copied into it. Then save the file using `CTRL+S` or by going to `File -> Save` on the top left of the code editor window.
+We are using the below code to create our Custom Webhook Template. Copy the code below using the copy button on the top right of the code block.
 
-```python title='UploadCustomWebhookTemplate.py' showLineNumbers
+Create a new file in the Code Editor called **`template.py`** and paste the code you copied into it.
+
+Then save the file using `CTRL+S` or by going to `File -> Save` on the top left of the code editor window.
+
+```python title='template.py' showLineNumbers
 # this script, for a given
 # - API key
 # - NetworkID
@@ -141,7 +145,7 @@ Save the file again.
 
 ### Installing the Requests Library
 
-Open the **Terminal** application, if it is not already open in the code editor, and change the directory to where you saved **UploadCustomWebhookTemplate.py** if the terminal is not already there.
+Open the **Terminal** application, if it is not already open in the code editor, and change the directory to where you saved **template.py** if the terminal is not already there.
 
 We need to install the **_Requests_** package. This is essential for making API calls:
 
@@ -176,7 +180,7 @@ If you run into an SSL error for urllib3 when running the script, please do the 
 
 :::
 
-`python3 UploadCustomWebhookTemplate.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXX"`
+`python3 template.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXX"`
 
 Press **_Enter_** when ready...
 
