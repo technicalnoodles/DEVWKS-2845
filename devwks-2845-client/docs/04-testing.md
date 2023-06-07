@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Testing the Deployment
+# Testing The Deployment
 
 We have a few tests that we can perform to validate our deployment is going to work. We will check the Meraki Dashboard to validate that it can send webhooks to our API, then we will generate our own example to send, and finally we will have the Meraki Dashboard send a legitimate event to our API.
 
