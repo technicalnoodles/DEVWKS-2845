@@ -60,7 +60,7 @@ cleumerad+saml20@gmail.com
 
 ### AWS Login
 
-[AWS](cs.co/devwks-2845-aws)
+[AWS](http://cs.co/devwks-2845-aws)
 
 Password: **CisL1v3.com**
 
