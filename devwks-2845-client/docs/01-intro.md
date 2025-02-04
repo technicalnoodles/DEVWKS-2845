@@ -12,7 +12,7 @@ This workshop will take you through the steps it takes to create an AWS Lambda f
 
 ### Meraki Login
 
-[Meraki](http://cs.co/devwks-2845-meraki)
+[Meraki](https://dev-192338.okta.com/home/ciscomeraki/0oapm9fvunu0zhO974x7/38929)
 
 Password: **CisL1v3.com**
 

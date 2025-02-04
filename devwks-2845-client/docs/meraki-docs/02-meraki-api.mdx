@@ -2,198 +2,74 @@
 sidebar_position: 2
 ---
 
-# Using the Meraki API & Webhooks
+# Create Meraki Webhook Template
 
-We first need to create a webhook template and then use the Meraki API to push the webhook template to the Dashboard.
+1. Go to **Organization > API & webhooks**
 
-:::info
+![org to webhooks](./img/org-api-webhooks.png)
 
-When using the workstation, you should already have a code editor (VSCode) open with a terminal at the bottom. You can create all files, edit code, and run commands using this editor.
+2. Click on the **Webhooks** tab.
 
-:::
+![webhooks tab](./img/webhooks-tab.png)
 
-## Create Webhook Template
+3. Click on the **Templates** tab in the **Webhooks** section.
 
-This **_may_** be done using the [webhook builder](https://webhook-builder-vpfmunhy6a-uc.a.run.app/) for future projects, but, for the purposes of this session, we are going to edit an already created template.
+![templates tab](./img/template-tab.png)
 
-## Download Code to be run locally
+4. Click on the **Create template** button on the right side.
 
-We are using the below code to create our Custom Webhook Template. Copy the code below using the copy button on the top right of the code block.
+![create template button](./img/create-template-button.png)
 
-Create a new file in the Code Editor called **`template.py`** and paste the code you copied into it.
+5. Give the template a name following the format of **trainee[id]XDRTemplate**. Here is an example:
 
-Then save the file using `CTRL+S` or by going to `File -> Save` on the top left of the code editor window.
+![template name](./img/template-name.png)
 
-```python title='template.py' showLineNumbers
-# this script, for a given
-# - API key
-# - NetworkID
-# - Webhook Template Name
-# creates a new custom webhook template
-# API information available here: https://developer.cisco.com/meraki/webhooks/#!custom-payload-templates-overview
-# precreated templates available here: https://github.com/meraki/webhook-payload-templates
-# further training available here: https://developer.cisco.com/learning/labs/meraki-webhook-template-editor-intro/create-your-custom-webhook-template/
-# postman collection: https://www.postman.com/meraki-api/workspace/cisco-meraki-s-public-workspace/collection/897512-c65299ed-39a5-4b02-bb4e-933c738bfcdf?action=share&creator=897512&ctx=documentation
+6. Take the below JSON and paste it into the **Edit** window.
 
-import sys, requests, json, getopt
-
-
-def main(argv):
-    ARG_APIKEY = ''
-    ARG_NAME = ''
-    ARG_NETWORKID = ''
-
-    try:
-        opts, args = getopt.getopt(argv, 'hk:n:i:')
-    except getopt.GetoptError:
-        printhelp()
-        sys.exit(2)
-
-    for opt, arg in opts:
-        if opt == '-h':
-            printhelp()
-            sys.exit()
-        elif opt == '-k':
-            ARG_APIKEY = arg
-        elif opt == '-n':
-            ARG_NETWORKID = arg
-        elif opt == '-i':
-            ARG_NAME = arg
-
-        # check that all mandatory arguments have been given
-    if ARG_APIKEY == '' or ARG_NETWORKID == '' or ARG_NAME == '':
-        printhelp()
-        sys.exit(2)
-
-    webhookTemplatePayload = "{\n\"version\": \"0.1\", \
-                                \n\"sharedSecret\": \"{{sharedSecret}}\", \
-                                \n\"sentAt\": \"{{sentAt}}\", \
-                                \n\"organizationId\": \"{{organizationId}}\", \
-                                \n\"organizationName\": \"{{organizationName}}\", \
-                                \n\"organizationUrl\": \"{{organizationUrl}}\", \
-                                \n\"networkId\": \"{{networkId}}\", \
-                                \n\"networkName\": \"{{networkName}}\", \
-                                \n\"networkUrl\": \"{{networkUrl}}\", \
-                                \n\"networkTags\": {{ networkTags | jsonify }}, \
-                                \n\"deviceSerial\": \"{{deviceSerial}}\", \
-                                \n\"deviceMac\": \"{{deviceMac}}\", \
-                                \n\"deviceName\": \"{{deviceName}}\", \
-                                \n\"deviceUrl\": \"{{deviceUrl}}\", \
-                                \n\"deviceTags\": {{ deviceTags | jsonify }}, \
-                                \n\"deviceModel\": \"{{deviceModel}}\", \
-                                \n\"alertId\": \"{{alertId}}\", \
-                                \n\"alertType\": \"Switch port disconnected\", \
-                                \n\"alertTypeId\": \"port_disconnected\", \
-                                \n\"alertLevel\": \"{{alertLevel}}\", \
-                                \n\"occurredAt\": \"{{occurredAt}}\", \
-                                \n\"alertData\": {\"portNum\": 1 , \
-                                                \"description\": \"Switch port is down\", \
-                                                \"status\": \"down\", \"prevStatus\": \
-                                                \"100 Gbps\",\"portDesc\": \"Corp Access\" \
-                                }\n}\n"
-
-    url = "https://api.meraki.com/api/v1/networks/" + ARG_NETWORKID + "/webhooks/payloadTemplates"
-
-    payload = json.dumps({
-        "name": ARG_NAME,
-        "body": webhookTemplatePayload
-    })
-
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "X-Cisco-Meraki-API-Key": ARG_APIKEY
+```javascript showLineNumbers
+{
+    "version": "0.1",
+    "sharedSecret": "{{sharedSecret}}",
+    "sentAt": "{{sentAt}}",
+    "organizationId": "{{organizationId}}",
+    "organizationName": "{{organizationName}}",
+    "organizationUrl": "{{organizationUrl}}",
+    "networkId": "{{networkId}}",
+    "networkName": "{{networkName}}",
+    "networkUrl": "{{networkUrl}}",
+    "networkTags": {{ networkTags | jsonify }},
+    "deviceSerial": "{{deviceSerial}}",
+    "deviceMac": "{{deviceMac}}",
+    "deviceName": "{{deviceName}}",
+    "deviceUrl": "{{deviceUrl}}",
+    "deviceTags": {{ deviceTags | jsonify }},
+    "deviceModel": "{{deviceModel}}",
+    "alertId": "{{alertId}}",
+    "alertType": "Switch port disconnected",
+    "alertTypeId": "port_disconnected",
+    "alertLevel": "{{alertLevel}}",
+    "occurredAt": "{{occurredAt}}",
+    "alertData": {
+        "portNum": 1 ,
+        "description": "Switch port is down",
+        "status": "down", "prevStatus":
+        "100 Gbps","portDesc": "Corp Access"
     }
-
-    response = requests.request("POST", url, headers=headers, data=payload)
-
-    print(response.status_code)
-    print(response.text)
-
-
-def printhelp():
-    print("this script, for a given")
-    print("-k API key")
-    print("-n NetworkID")
-    print("-i Webhook Template Name")
-    print("creates a new custom webhook template")
-    print("The only editing it needs is the webhook template payload")
-    print("")
-    print("API information available here: https://developer.cisco.com/meraki/webhooks/#!custom-payload-templates-overview")
-    print("precreated templates available here: https://github.com/meraki/webhook-payload-templates")
-    print("further training available here: https://developer.cisco.com/learning/labs/meraki-webhook-template-editor-intro/create-your-custom-webhook-template/")
-    print("postman collection: https://www.postman.com/meraki-api/workspace/cisco-meraki-s-public-workspace/collection/897512-c65299ed-39a5-4b02-bb4e-933c738bfcdf?action=share&creator=897512&ctx=documentation")
-
-
-if __name__ == '__main__':
-    main(sys.argv[1:])
+}
 ```
 
-**Changes**
+7. After pasting the JSON, edit the **portNum** from the number 1 to your station number. The edit window should look similar to the below:
 
-Where we have `\n\"deviceSerial\": \"{{deviceSerial}}\"` we are going to replace `\"{{deviceSerial}}\"` with \"Q2EW-CTL2-MQRL\"
+![edit window](./img/edit-window.png)
 
-:::tip
-It's imperative that, within the quotes, you have just the **_serial number_** as above, with no curly brackets, so it will look like the below:
+8. Click on **Generate Preview** and it should fill in all the {{value}} with a value pulled from the Meraki Network. Of note, the device serial gets replaced with the switch serial number we want.
 
-`\n\"deviceSerial\": \"Q2EW-CTL2-MQRL\"`
-:::
+9. Click **Save** on the bottom right.
 
-Secondly, where we have the line `\n\"alertData\": {\"portNum\": 1 , \ ` change the number 1 to your attendee ID.
+![save template](./img/template-save.png)
 
-Save the file again.
+10. Go back to the **Templates** tab by clicking on it again, and you should see the new template you created at the bottom of the list:
 
-### Installing the Requests Library
+![template in list](./img/template-in-list.png)
 
-Open the **Terminal** application, if it is not already open in the code editor, and change the directory to where you saved **template.py** if the terminal is not already there.
-
-We need to install the **_Requests_** package. This is essential for making API calls:
-
-Type:
-
-`pip3 install requests`
-
-The **_requests_** package should install as shown:
-
-![Installing requests package](../img/meraki/03-installingRequests.png)
-
-### Running the code!
-
-For this, you'll need your:
-
-- API Key
-- Network ID
-
-And
-
-A meaningful name for the webhook. A suggestion is to use **_TraineeXX_** where **_XX_** is your trainee number.
-
-The below is how to run the command and you will need to replace each starred word (and the stars) with the subsequent data you got earlier:
-
-:::caution
-
-If you run into an SSL error for urllib3 when running the script, please do the the below to fix it:
-
-`pip3 uninstall urllib3`
-
-`pip3 install urllib3==1.26.6`
-
-:::
-
-`python3 template.py -k ***YOURAPIKEY*** -n ***YOURNETWORKID*** -i "TraineeXX"`
-
-Press **_Enter_** when ready...
-
-The API call should run, and, if successful, should show:
-
-![API Call results](../img/meraki/04-SuccessfulAPICall.png)
-
-We can also check by going to `Systems Manager > Alerts > Webhooks` in the Meraki Dashboard.
-
-Click `Add an HTTPS receiver`
-
-Under **_Payload Template_** click the drop down box, and under _Custom templates_ you should see something the webhook template you just created. Similar to what is in the image below:
-
-![Custom Webhook template Installed](../img/meraki/05-CustomWHTInstalled.png)
-
-This means our webhook has been added to the Meraki Dashboard. We can go ahead and start creating the Lambda Function.
+Now we can move onto creating the Automation workflow in XDR.
