@@ -1,0 +1,36 @@
+---
+sidebar_position: 1
+---
+
+# Creating a Workflow
+
+When creating a workflow without using the built in Meraki integraiton, we first need to be able to store the API key in a secure way within XDR, then we can use it in the workflow.
+
+## Create a Secure Workflow Variable
+
+1. After logging into XDR, go to **Automate -> Variables**
+
+![variables](./img/variables.png)
+
+2. Then click on the **+ Nwew Variable** button on the right side to create a new variables
+
+![variables](./img/new-variable.png)
+
+3. In the fields of the new variable change them as follows:
+
+- **Data Type** -> _Secure String_
+- **Display Name** -> _[stationNumber]MerakiKey_
+- **Scope** -> Environment
+- **Value** -> meraki api key from earlier
+
+It should look siilar to the below:
+
+![variable filled](./img/variable-filled.png)
+
+4. Click **Save** on the bottom right.
+
+![save button](./img/save.png)
+
+Now we can work on making the workflow
+
+## Create a Workflow

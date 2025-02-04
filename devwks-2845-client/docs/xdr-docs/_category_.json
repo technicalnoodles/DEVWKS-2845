@@ -3,6 +3,6 @@
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "This section will go over creating an XDR Automation workflow and triggers."
+    "description": "When making a XDR Automation workflow, there are two ways to access Meraki.  One is to use the Meraki API key directly and the other is to integrate Meraki into XDR.  The second option is easier to use and faster, but you are limited to making API calls to that single XDR organization.  The first option includes more setup, but it more flexible.  We will be going over the secodn option in this guide and we will show you the second as a quick note later on."
   }
 }
