@@ -9,12 +9,10 @@ When creating a workflow without using the built in Meraki integraiton, we first
 ## Create a Secure Workflow Variable
 
 1. After logging into XDR, go to **Automate -> Variables**
-
-![variables](./img/variables.png)
+   ![variables](./img/variables.png)
 
 2. Then click on the **+ Nwew Variable** button on the right side to create a new variables
-
-![variables](./img/new-variable.png)
+   ![variables](./img/new-variable.png)
 
 3. In the fields of the new variable change them as follows:
 
@@ -23,14 +21,102 @@ When creating a workflow without using the built in Meraki integraiton, we first
 - **Scope** -> Environment
 - **Value** -> meraki api key from earlier
 
-It should look siilar to the below:
-
-![variable filled](./img/variable-filled.png)
+  It should look similar to the below:
+  ![variable filled](./img/variable-filled.png)
 
 4. Click **Save** on the bottom right.
 
-![save button](./img/save.png)
+   ![save button](./img/save.png)
 
 Now we can work on making the workflow
 
 ## Create a Workflow
+
+To create a workflow, we first need to to go to the workflow editor. Then we can create our workflow.
+
+1. Go to **Automate -> Worflows**
+   ![workflows](./img/workflows-page.png)
+2. Click on **Create Workflow** on the far right of the screen.
+   ![create workflow](./img/create-workflow.png)
+3. Leave the **Blank Custom Workflow** selected and click on \*\*Continue on the bottom right of the pop up.
+   ![blank workflow](./img/blank-workflow.png)
+4. Now we can name the workflow. Please use your workstation ID followed by MerakiWF. It should look like the below example:
+   ![name workflow](./img/name-workflow.png)
+5. This bring you to a blank workflow like the below:
+   ![blank workflow editor](./img/blank-workflow-editor.png)
+
+### JSONPath Query
+
+1. We need to first be able to read data from the webhook when Meraki sends it. To do this, we can search for _JSONPath_ in the top left search bar. It should return a **JSONPath Query**. Click and drag it into the workflow editor area. It should look like the below:
+   ![blank workflow editor](./img/json-path-query.png)
+2. We will be changing the data being fed into the **JSONPath Query** later, but for now, we need some dummy data to make sure the workflow is valid. Take the below JSON and paste it into **Source JSON to Query** box on the right side.
+
+```javascript
+{
+  "version": "0.1",
+  "sharedSecret": "",
+  "sentAt": "2023-01-13T19:57:07.307562Z",
+  "organizationId": "000000",
+  "organizationName": "EX net",
+  "organizationUrl": "https://n471.meraki.com/o/000000/manage/organization/overview",
+  "networkId": "N_00000000",
+  "networkName": "Ex net",
+  "networkUrl": "https://n471.meraki.com/ex_net/n/000000/manage/nodes/wired_status",
+  "networkTags": [],
+  "deviceSerial": "Q00Y-U00R-T00G",
+  "deviceMac": "00:00:00:d7:14:83",
+  "deviceName": "Home MX",
+  "deviceUrl": "https://n471.meraki.com/ex_net/n/000000/manage/nodes/new_wired_status",
+  "deviceTags": [],
+  "deviceModel": "MX67W",
+  "alertId": "",
+  "alertType": "Switch port disconnected",
+  "alertTypeId": "port_disconnected",
+  "alertLevel": "warning",
+  "occurredAt": "2023-01-13T19:57:07.259607Z",
+  "alertData": {
+    "portNum": 3,
+    "description": "Switch port is down",
+    "status": "down",
+    "prevStatus": "100 Gbps",
+    "portDesc": "Corp Access"
+  }
+}
+```
+
+It should look like the below now:
+![blank workflow editor](./img/paste-json.png)
+
+3. Now we need to create 4 **JSONPath Queries**
+   ![blank queries](./img/blank-queries.png)
+
+4. The first query will be to get the devices serial number. Click on **+ Add**, then fill in the 3 fields like the below:
+
+- JSONPath Query -> $.deviceSerial
+- Property Name -> deviceSerial
+- Property Type -> String
+  ![serial query](./img/device-serial.png)
+
+5. We will repeat this 3 more times for these queries:
+
+   | JSONPath Query      | Property Name | Property Type |
+   | ------------------- | ------------- | ------------- |
+   | $.alertTypeId       | alertType     | String        |
+   | $.alertData.status  | portStatus    | String        |
+   | $.alertData.portNum | portNum       | String        |
+
+   ![all queries](./img/all-queries.png)
+
+6. Now we need to check the box **Continue Workflow Execution On Failure**
+   ![continue](./img/continue-workflow.png)
+   With this done, we can now pass this data to other parts of our workflow.
+
+### Condition Block
+
+1. We need to check that we got the right type of alert from the webhook and that we got a specific port status. To do that, we can add a **Condition Block**. We can search for _condition_ in the top left search box and then drag the **Condition Block** item into the editor below the JSONPath Query.
+   ![condition block](./img/condition-block.png)
+
+2. Delete the second **Condition Branch** by clicking on the 3 dots on the top right of it and selecting **Delete**
+   ![branch delete](./img/branch-delete.png)
+   Now we should have something similar to the below:
+   ![single branch](./img/single-condition.png)
