@@ -135,3 +135,65 @@ It should look like the below now:
 These are all the conditions we need to look for. Now we want to add what action we will take in the workflow when the condition is true.
 
 ### HTTP Request
+
+1. Search for _http_ in the left search box and drag the **HTTP Request** item into the condition block.
+   ![http request](./img/http-request.png)
+
+2. Click the **Target** dropdown on the right side to expand its options. Then click on **override workflow target**
+   ![http request](./img/override-target.png)
+
+3. Click into the **Target** field and click on **+ Add New**
+   ![http request](./img/add-new-target.png)
+
+4. Set the fields like the below:
+
+- Display Name -> [stationID]MerakiApi
+- No Account Keys -> true
+- Protocol -> https
+- Host/IPAddress -> api.meraki.com
+
+  It should look similar to the below image:
+  ![http request](./img/target-settings.png)
+
+5. Click **Save**
+
+6. Expand the **HTTP Request** section
+
+7. In the **Relative URL** field, type in _/api/v1/devices/_
+
+8. Click on the small selector we have used before and pick the **deviceSerial** variable.
+
+9. Continue typing after the device serial is filled in with this: _/switch/ports/_
+
+10. Click on the selector and select the **portNum** variable. The URL should look similar to the below:
+    ![http request](./img/relative-url.png)
+
+11. Now change the **Method** to **PUT**
+
+12. In the **Request Body** paste in the below JSON:
+
+```javascript
+{ "enabled": false }
+```
+
+The **HTTP Request** section should look like the below:
+![http request](./img/http-request-final.png)
+
+13. Expand the **Headers** section
+
+14. Change the **Content Type** field to **Application JSON**
+
+15. Put _application/json_ into the **Accept** field
+
+16. Now we need to add some custom headers. Under **Header** press the **+ Add** to add a new field.
+
+17. In the new field put _X-Cisco-Meraki-API-Key_ in the **Header** field.
+
+18. In the **Value** field, click on the selector button then select **Env -> yourMerakiKey**. Click **Save**
+    ![http request](./img/env-meraki-key.png)
+
+This concludes the workflow work until we have made a trigger and an Automation Rule to pass the webhook data to the workflow.
+
+
+
+
