@@ -4,11 +4,9 @@ sidebar_position: 1
 
 # Introduction
 
-This workshop will take you through the steps it takes to create an XDR Automate Workflow to respond to a webhook from the Meraki Dashboard, and create a custom webhook template for the Meraki Dashboard.
+This workshop will take you through the steps it takes to create an AWS Lambda function, create an AWS API endpoint, code a simple function to respond to a webhook from the Meraki Dashboard, and create a custom webhook template for the Meraki Dashboard.
 
-The reason we created this workshop to showcase how you can create your own functionality for a product when it doesn't exist yet. We will go through how to find a port that has been disconnected and automate shutting down the port to mimic an error disabled state.
-
-![meraki dashboard](../static/img/dashboard.png)
+![meraki dashboard](../img/dashboard.png)
 
 # Lets's Login!!!
 

@@ -4,15 +4,25 @@ sidebar_position: 5
 
 # Testing The Deployment
 
-We have a few tests that we can perform to validate our deployment is going to work. We will check the Meraki Dashboard to validate that it can send webhooks to our API, then we will generate our own example to send, and finally we will have the Meraki Dashboard send a legitimate event to our API.
+Remember the XDR Webhook API Key and URL we mentioned to save. Now we get to use them.
 
-## Test Using The Meraki Dashboard
+1. Go back to the Meraki Dashboard.
 
-Within the Meraki Dashboard on the Alerts page where we just setup a new webhook, click on the **Send test webhook** button to verify that Meraki can successfully send a webhook.
+2. Go to **Network-wide -> Alerts**
+   ![http request](./img/alerts-page.png)
 
-After clicking on the button and waiting a little while, we should see a status of `delivered`, like the below image shows:
-![delivered webhook](./img/delivered-webhook-2.png)
+3. Scroll to the bottom and click on **Add an HTTPS Receiver**
+   ![http request](./img/receiver.png)
 
-This webhook test we performed will send the template we created to the Lambda function and the Lambda function will detect that it is a port disconnected event. It will then reach back out to Meraki and shutdown your assigned port. To check if the port was successfully shutdown we can go to the `Switch` network and select the switch to see the port is now gray instead of black.
+4. Give the receiver a name similar to your stationidMerakiR, ex: _19MerakiR_
 
-![shutdown port](./img/shut-port.png)
+5. Fill in the receiver fields with the Webhook API key and URL. The URL goes into the **URL** field, and the API key goes into the **Shared Secret** field.
+
+6. Change the **Payload Template** to the template that was created earlier. It should look similar to the below:
+   ![http request](./img/finished-receiver.png)
+
+7. Click on **Send test Webhook**
+
+If everything went well, the port on the switch should now be in a disabled state.
+
+This concludes the workshop. Thank you for attending.
