@@ -120,3 +120,18 @@ It should look like the below now:
    ![branch delete](./img/branch-delete.png)
    Now we should have something similar to the below:
    ![single branch](./img/single-condition.png)
+
+3. Click on the one condition block that is left and click on the **Condition** drop down to expand it.
+
+4. We are going to create two conditions we want to check. Thr first is to check for the type of alert we received. To do that we can select the small browser window icon in the **Property** text box. Then go to **Activities -> JSONPath Query -> Jsonpath Queries -> alertType**. Click on **Save**
+   ![alerttype](./img/select-alert-type.png)
+
+5. Now we can set the value to _port_disconnected_ by typing it into the **Value** field. The condition should look like the below.
+   ![alerttype](./img/condition-1.png)
+
+6. Now we can create the second condition. We want to set the **Property** field to portStatus using the selector from before. And set the **Value** to _down_. It should look similar to the below image:
+   ![alerttype](./img/condition-2.png)
+
+These are all the conditions we need to look for. Now we want to add what action we will take in the workflow when the condition is true.
+
+### HTTP Request
