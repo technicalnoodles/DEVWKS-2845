@@ -62,7 +62,7 @@ cleumerad+saml20@gmail.com
 
 ### XDR Login
 
-[AWS](http://xdr.us.security.cisco.com)
+[XDR](http://xdr.us.security.cisco.com)
 
 Password: **CisL1v3.com**
 
