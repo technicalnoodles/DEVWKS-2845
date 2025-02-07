@@ -60,9 +60,9 @@ cleumerad+saml19@gmail.com
 
 cleumerad+saml20@gmail.com
 
-### AWS Login
+### XDR Login
 
-[AWS](http://cs.co/devwks-2845-aws)
+[AWS](http://xdr.us.security.cisco.com)
 
 Password: **CisL1v3.com**
 
