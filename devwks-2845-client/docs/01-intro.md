@@ -64,48 +64,10 @@ cleumerad+saml20@gmail.com
 
 [XDR](http://xdr.us.security.cisco.com)
 
-Password: **CisL1v3.com**
+Password: **Ciscolive!**
 
 Username List:
 
-trainee1
-
-trainee2
-
-trainee3
-
-trainee4
-
-trainee5
-
-trainee6
-
-trainee7
-
-trainee8
-
-trainee9
-
-trainee10
-
-trainee11
-
-trainee12
-
-trainee13
-
-trainee14
-
-trainee15
-
-trainee16
-
-trainee17
-
-trainee18
-
-trainee19
-
-trainee20
+cl01@boxedsoc.com
 
 We will start with getting the information we need from the Meraki Dashboard.
